@@ -2,51 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/bookFav.png" type="image/gif" sizes="16x16">
+  <!-- bootstrap CDN  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="style.css" />
+  <title>Book Archive</title>
 </head>
 
-<body>
-    <section class="container mt-5">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" id="searchInput" placeholder="Recipient's username"
-                aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="searchBtn">Button</button>
-        </div>
-    </section>
-    <section class="container">
-        <!-- country details  -->
-        <div class="row" id="book-details">
+<body class="container .bg-light">
+  <h1 class="text-center mt-5 mb-5 text-white">Book Archive</h1>
 
 
-        </div>
-        <hr>
-    </section>
-    <section class="container mt-2">
-        <div id="errors">
+  <!-- //Search Button  -->
 
-        </div>
+  <div class="input-group mb-3 mx-auto w-50">
+    <input id="search-input" type="text" class="form-control" placeholder="Search Book By Name"
+      aria-label="Search Book By Name" aria-describedby="button-addon2" />
+    <button id="search-btn" onclick="searchBook()" class="btn btn-danger btn-outline-light ms-1" type="button"
+      id="button-addon2">Search Books</button>
+  </div>
 
-        <!-- countries  -->
-        <div class="row" id="books-container">
-            <div class="text-center">
+  <!-- total search  Found -->
+  <h4 id="total-search-found" class="text-center text-danger"></h4>
 
+  <div class="d-flex justify-content-center" id="book-details">
 
-            </div>
-            <!-- repeating part  -->
+  </div>
+  <!-- books Container -->
+  <div id="books-container" class="position-relative row row-cols-1 row-cols-sm-3 pt-5 g-4">
 
+  </div>
 
-        </div>
+  <!-- JS Link  -->
+  <script src="js/main.js"></script>
 
-    </section>
-
-    <script src="js/main.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,70 +1,97 @@
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const booksContainer = document.getElementById('books-container');
-const errorDiv = document.getElementById('errors');
-const bookDetails = document.getElementById('book-details');
+// documents call 
+const container = document.getElementById("books-container");
+const searchedInput = document.getElementById("search-input");
+const totalBookFound = document.getElementById("total-search-found");
+const bookDetails = document.getElementById("book-details");
 
+const searchBook = () => {
+  // get searched text
+  const searchText = searchedInput.value;
+  // error message if input is empty
+  if (searchText == "") {
+    container.innerHTML = `
+        <h3 class="position-absolute w-100 fw-bold text-danger d-flex align-items-center justify-content-center" style='height:200px'>
+            Empty Input..!
+        </h3>`;
+  }
+  else {
+    // spinner 
+    container.innerHTML = `
+        <div id="loadingMessage" class="position-absolute w-100 d-flex align-items-center justify-content-center" style='height:250px'>
+            <img src="images/Infinity-1s-200px.svg">
+        </div>`;
 
-searchBtn.addEventListener('click', function () {
-    const search = searchInput.value;
-    if (search == '') {
-        errorDiv.innerHTML = 'search field cannot be empty';
-        return;
-    }
-    // clear 
-    booksContainer.innerHTML = '';
-    bookDetails.innerHTML = '';
+    //Get API
 
-    const url = `http://openlibrary.org/search.json?q=${search}`;
-
-
+    const url = `http://openlibrary.org/search.json?q=${searchText}`;
     fetch(url)
-        .then(res => res.json())
-        .then(data => showData(data.docs));
+      .then((response) => response.json())
+      .then((data) => showData(data));
+    searchedInput.value = ''
+  }
+  // clear 
 
-    searchInput.value = ''
+  while (bookDetails.lastChild) {
+    bookDetails.removeChild(bookDetails.lastChild);
+  };
+  totalBookFound.innerText = ``;
+};
+const showData = (data) => {
+  //Total Book Found
 
-})
-function showData(bookArray) {
+  totalBookFound.innerText = ` Total ${data.numFound} Book found`;
 
-    // error handiling 
-    if (bookArray.length === 0) {
-        errorDiv.innerText = 'No Books Found';
-    }
-    else {
-        errorDiv.innerText = ''
-    }
+  // clear the container field
+  while (container.lastChild) {
+    container.removeChild(container.lastChild);
+  }
+
+  if (data.status === 404) {
+    container.innerHTML = `
+    <h3 class="position-absolute w-100 fw-bold d-flex align-items-center justify-content-center" style='height:200px'>
+        No Book Found..!
+    </h3>`;
+  } else {
+    const bookArray = data.docs;
     bookArray.forEach((book) => {
+      // create a div
+      const div = document.createElement("div");
+      div.classList.add("col");
 
-        // its a loog so it will repete 
+      div.addEventListener("click", () => {
+        showDetails(book);
+      });
 
-        const div = document.createElement('div')
-        div.classList.add('col-md-3');
+      // Book Picture & Title Add & add a div
+      div.innerHTML =
+        `
+      <div class="card h-100">
+      <img height="300" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-2" alt="...">
+          <div class="card-body">
+              <h5 class="card-title">${book.title}</h5>
+          </div>
 
-        const imgUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+      </div>
+      `
+      // Add div
 
+      container.appendChild(div);
+    });
+  }
+};
 
-        div.innerHTML = `
-                <div class="card h-100" onclick="handel()">
-                        <img src="${imgUrl}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${book.author_alternative_name}</h5>
-                    </div>
-                   
-                </div>
-                `
-        booksContainer.appendChild(div);
-    })
-}
+//Book Details Show
+const showDetails = (book) => {
+  bookDetails.innerHTML = `
+        <div class="card h-100 mt-3" style="width: 25rem;">
+        <img height="400" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-3" alt="...">
+          <div class="card-body">
+            <h5 class="text-justify"><b>Book Title</b> : ${book.title}</h5>
+            <h6><b>Author Name</b> : ${book.author_name}</h6>
+            <h6><b>Publish Date</b> : ${book.publish_date}</h6>
+            <h6><b>First Publish Year</b> : ${book.first_publish_year}</h6>
+            <h6><b>Publisher</b> : ${book.publisher}</h6>
+          </div>
+      </div>`
 
-
-function showDetails(hello) {
-    console.log(hello)
-
-
-}
-
-
-
-
-
+};
