@@ -4,11 +4,12 @@ const searchedInput = document.getElementById("search-input");
 const totalBookFound = document.getElementById("total-search-found");
 const bookDetails = document.getElementById("book-details");
 
+
 const searchBook = () => {
-  // get searched text
+  // get searched input
   const searchText = searchedInput.value;
-  // error message if input is empty
-  if (searchText == "") {
+  // error message 
+  if (searchText === "") {
     container.innerHTML = `
         <h3 class="position-absolute w-100 fw-bold text-danger d-flex align-items-center justify-content-center" style='height:200px'>
             Empty Input..!
@@ -36,57 +37,58 @@ const searchBook = () => {
   };
   totalBookFound.innerText = ``;
 };
-const showData = (data) => {
+const showData = (book) => {
   //Total Book Found
+  totalBookFound.innerText = ` Total ${book.numFound} Books found`;
 
-  totalBookFound.innerText = ` Total ${data.numFound} Book found`;
 
   // clear the container field
   while (container.lastChild) {
     container.removeChild(container.lastChild);
-  }
+  };
 
-  if (data.status === 404) {
+  if (book.status === 404) {
     container.innerHTML = `
     <h3 class="position-absolute w-100 fw-bold d-flex align-items-center justify-content-center" style='height:200px'>
         No Book Found..!
     </h3>`;
-  } else {
-    const bookArray = data.docs;
-    bookArray.forEach((book) => {
-      // create a div
-      const div = document.createElement("div");
-      div.classList.add("col");
+  };
+  const bookArray = book.docs;
+  bookArray.forEach((book) => {
+    // create a div
+    const div = document.createElement("div");
+    div.classList.add("col");
 
-      div.addEventListener("click", () => {
-        showDetails(book);
-      });
-
-      // Book Picture & Title Add & add a div
-      div.innerHTML =
-        `
-      <div class="card h-100">
-      <img height="300" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-2" alt="...">
-          <div class="card-body">
-              <h5 class="card-title">${book.title}</h5>
-          </div>
-
-      </div>
+    // Book card with name and cover
+    div.innerHTML =
       `
-      // Add div
+        <div class="card h-100">
+        <img height="300" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-2" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${book.title}</h5>
+            </div>
+  
+        </div>
+        `
+    // Add div
 
-      container.appendChild(div);
+    container.appendChild(div);
+
+    div.addEventListener("click", () => {
+      showDetails(book);
     });
-  }
+
+  });
+
 };
 
-//Book Details Show
+//Book Details card
 const showDetails = (book) => {
   bookDetails.innerHTML = `
         <div class="card h-100 mt-3" style="width: 25rem;">
         <img height="400" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-3" alt="...">
           <div class="card-body">
-            <h5 class="text-justify"><b>Book Title</b> : ${book.title}</h5>
+            <h5 class="card-header"><b>Book Title</b> : ${book.title}</h5>
             <h6><b>Author Name</b> : ${book.author_name}</h6>
             <h6><b>Publish Date</b> : ${book.publish_date}</h6>
             <h6><b>First Publish Year</b> : ${book.first_publish_year}</h6>
@@ -95,3 +97,7 @@ const showDetails = (book) => {
       </div>`
 
 };
+
+
+
+

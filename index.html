@@ -12,20 +12,27 @@
   <title>Book Archive</title>
 </head>
 
-<!-- <style>
+<style>
   .backGround {
 
-    background-image: url("images/3133075.jpg");
+    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("images/3133075.jpg");
+
   }
-</style> -->
+
+  .input-field {
+    box-shadow: 1px 1px 15px 1px #FFFAFA;
+  }
+</style>
 
 <body class="container backGround ">
-  <h1 class="text-center mt-5 mb-5 ">Book Archive</h1>
 
+
+
+  <h1 class="text-center mt-5 mb-5 text-white">Book Archive</h1>
 
   <!-- //Search Button  -->
 
-  <div class="input-group mb-3 mx-auto w-50">
+  <div class="input-group mb-3 mx-auto w-50 input-field">
     <input id="search-input" type="text" class="form-control" placeholder="Search Book By Name"
       aria-label="Search Book By Name" aria-describedby="button-addon2" />
     <button id="search-btn" onclick="searchBook()" class="btn btn-danger btn-outline-light ms-1" type="button"
@@ -33,9 +40,14 @@
   </div>
 
   <!-- total search  Found -->
-  <h4 id="total-search-found" class="text-center text-danger"></h4>
+  <div class="total-search-found">
+
+  </div>
+
+  <h2 id="total-search-found" class="text-center text-danger fw-bold"></h2>
 
   <div class="d-flex justify-content-center" id="book-details">
+
 
   </div>
   <!-- books Container -->
