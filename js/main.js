@@ -73,9 +73,25 @@ const showData = (book) => {
     const div = document.createElement("div");
     div.classList.add("col");
 
+
     // Book card with name and cover
-    div.innerHTML =
-      `
+
+    // if image is undefine it will show this image  
+    if (book.cover_i == undefined) {
+      div.innerHTML =
+        `
+        <div class="card h-100">
+        <img height="400" src="images/image-not-found.png" class="card-img-top p-2" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${book.title}</h5>
+            </div>
+  
+        </div>
+        `
+    }
+    else {
+      div.innerHTML =
+        `
         <div class="card h-100">
         <img height="400" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-2" alt="...">
             <div class="card-body">
@@ -84,6 +100,7 @@ const showData = (book) => {
   
         </div>
         `
+    }
     // Add div
     container.appendChild(div);
 
