@@ -4,7 +4,7 @@ const searchedInput = document.getElementById("search-input");
 const totalBookFound = document.getElementById("total-search-found");
 const bookDetails = document.getElementById("book-details");
 
-
+// search books function 
 const searchBook = () => {
   // get searched input
   const searchText = searchedInput.value;
@@ -37,6 +37,8 @@ const searchBook = () => {
   };
   totalBookFound.innerText = ``;
 };
+
+// show books function 
 const showData = (book) => {
   //Total Book Found
   totalBookFound.innerText = ` Total ${book.numFound} Books found`;
@@ -63,7 +65,7 @@ const showData = (book) => {
     div.innerHTML =
       `
         <div class="card h-100">
-        <img height="300" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-2" alt="...">
+        <img height="400" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-2" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${book.title}</h5>
             </div>
@@ -71,18 +73,15 @@ const showData = (book) => {
         </div>
         `
     // Add div
-
     container.appendChild(div);
 
     div.addEventListener("click", () => {
       showDetails(book);
     });
-
   });
-
 };
 
-//Book Details card
+//show Book Details function
 const showDetails = (book) => {
   bookDetails.innerHTML = `
         <div class="card h-100 mt-3" style="width: 25rem;">
@@ -95,7 +94,6 @@ const showDetails = (book) => {
             <h6><b>Publisher</b> : ${book.publisher}</h6>
           </div>
       </div>`
-
 };
 
 
