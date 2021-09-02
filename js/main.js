@@ -96,13 +96,14 @@ const showData = (book) => {
 //show Book Details function
 
 const showDetails = (book) => {
-
+  // get book details 
   const bookTitle = book.title;
   const authorName = book.author_name[0];
   const bookPublishDate = book.publish_date[0];
   const FirstPublishYear = book.first_publish_year[0];
   const publisherName = book.publisher[0];
 
+  // show books details 
   bookDetails.innerHTML = `
         <div class="card h-100 mt-3" style="width: 25rem;">
         <img height="400" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-3" alt="...">
