@@ -42,14 +42,16 @@ const searchBook = () => {
 
 // show books function 
 const showData = (book) => {
-  //Total Book Found
-  //Total Book Found
+
+  // if no Books Found error message 
   if (book.numFound === 0) {
     noBooksFound.innerHTML = `<h3 class="position-absolute w-100 fw-bold text-danger d-flex align-items-center justify-content-center" style='height:200px'>
     No Books Found..!
 </h3>`;
     console.log(123)
   }
+
+  //Total Book Found
   else {
     totalBookFound.innerText = ` Total ${book.numFound} Books found`;
   }
