@@ -42,6 +42,9 @@ const searchBook = () => {
 const showData = (book) => {
   //Total Book Found
   totalBookFound.innerText = ` Total ${book.numFound} Books found`;
+  if (book.numFound == 0) {
+    console.log("something")
+  }
 
 
   // clear the container field
