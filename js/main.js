@@ -94,16 +94,25 @@ const showData = (book) => {
 };
 
 //show Book Details function
+
 const showDetails = (book) => {
+
+  const bookTitle = book.title;
+  const authorName = book.author_name[0];
+  const bookPublishDate = book.publish_date[0];
+  const FirstPublishYear = book.first_publish_year[0];
+  const publisherName = book.publisher[0];
+
   bookDetails.innerHTML = `
         <div class="card h-100 mt-3" style="width: 25rem;">
         <img height="400" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top p-3" alt="...">
           <div class="card-body">
-            <h5 class="card-header"><b>Book Title</b> : ${book.title}</h5>
-            <h6><b>Author Name</b> : ${book.author_name}</h6>
-            <h6><b>Publish Date</b> : ${book.publish_date}</h6>
-            <h6><b>First Publish Year</b> : ${book.first_publish_year}</h6>
-            <h6><b>Publisher</b> : ${book.publisher}</h6>
+            <h5 class="card-header"><b>Book Title</b> : ${bookTitle}</h5>
+            <h6><b>Author Name</b> : ${authorName}</h6>
+            <h6><b>Publish Date</b> : ${bookPublishDate}</h6>
+            <h6><b>First Publish Year</b> : ${FirstPublishYear}</h6>
+            <h6><b>Publisher</b> : ${publisherName}</h6>
           </div>
       </div>`
 };
+
