@@ -3,6 +3,7 @@ const container = document.getElementById("books-container");
 const searchedInput = document.getElementById("search-input");
 const totalBookFound = document.getElementById("total-search-found");
 const bookDetails = document.getElementById("book-details");
+const noBooksFound = document.getElementById('no-books-found-error');
 
 // search books function 
 const searchBook = () => {
@@ -36,12 +37,22 @@ const searchBook = () => {
     bookDetails.removeChild(bookDetails.lastChild);
   };
   totalBookFound.innerText = ``;
+  noBooksFound.innerHTML = ``;
 };
 
 // show books function 
 const showData = (book) => {
   //Total Book Found
-  totalBookFound.innerText = ` Total ${book.numFound} Books found`;
+  //Total Book Found
+  if (book.numFound === 0) {
+    noBooksFound.innerHTML = `<h3 class="position-absolute w-100 fw-bold text-danger d-flex align-items-center justify-content-center" style='height:200px'>
+    No Books Found..!
+</h3>`;
+    console.log(123)
+  }
+  else {
+    totalBookFound.innerText = ` Total ${book.numFound} Books found`;
+  }
 
   // clear the container field
   while (container.lastChild) {
@@ -94,7 +105,3 @@ const showDetails = (book) => {
           </div>
       </div>`
 };
-
-
-
-
