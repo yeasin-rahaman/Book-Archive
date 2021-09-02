@@ -23,8 +23,8 @@ const searchBook = () => {
 
     //Get API
 
-    const url = `http://openlibrary.org/search.json?q=${searchText}`;
-    fetch(url)
+    // const url = ;
+    fetch(`https://openlibrary.org/search.json?q=${searchText}`)
       .then((response) => response.json())
       .then((data) => showData(data));
     searchedInput.value = ''
